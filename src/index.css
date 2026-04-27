@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:wght@700;900&family=Outfit:wght@400;600;800&display=swap');
+@import "tailwindcss";
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Fluid spacing and font sizes for better responsiveness */
+  --spacing-fluid: clamp(1rem, 5vw, 1.5rem);
+  --text-fluid-xs: clamp(0.65rem, 2vw, 0.75rem);
+  --text-fluid-sm: clamp(0.75rem, 2.5vw, 0.875rem);
+  --text-fluid-base: clamp(0.875rem, 3vw, 1rem);
+  --text-fluid-lg: clamp(1rem, 3.5vw, 1.125rem);
+  --text-fluid-xl: clamp(1.125rem, 4vw, 1.25rem);
+  --text-fluid-2xl: clamp(1.25rem, 5vw, 1.5rem);
+  --text-fluid-3xl: clamp(1.5rem, 6vw, 1.875rem);
+  --text-fluid-4xl: clamp(1.875rem, 8vw, 2.25rem);
+
+  /* iOS Material System */
+  --radius-ios: 24px;
+  --radius-ios-sm: 12px;
+  --radius-ios-lg: 32px;
+  
+  --shadow-ios: 0 4px 24px -1px rgba(0, 0, 0, 0.06), 0 2px 8px -1px rgba(0, 0, 0, 0.04);
+  --shadow-ios-lg: 0 12px 48px -4px rgba(0, 0, 0, 0.12), 0 4px 16px -2px rgba(0, 0, 0, 0.08);
+
+  /* Apple 8pt Spacing System */
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --nav-height: 80px;
+
+  /* Semantic System Colors */
+  --color-system-label: var(--system-label);
+  --color-system-secondary-label: var(--system-secondary-label);
+  --color-system-tertiary-label: var(--system-tertiary-label);
+  --color-system-quaternary-label: var(--system-quaternary-label);
+  
+  --color-system-background: var(--system-background);
+  --color-secondary-system-background: var(--secondary-system-background);
+  --color-tertiary-system-background: var(--tertiary-system-background);
+}
+
+:root {
+  --system-label: #000000;
+  --system-secondary-label: #8E8E93;
+  --system-tertiary-label: #AEAEB2;
+  --system-quaternary-label: #C7C7CC;
+  
+  --system-background: #FFFFFF;
+  --secondary-system-background: #F2F2F7;
+  --tertiary-system-background: #FFFFFF;
+
+  --theme-bg: var(--secondary-system-background);
+  --theme-surface: var(--system-background);
+  --theme-surface-secondary: var(--secondary-system-background);
+  --theme-text: var(--system-label);
+  --theme-text-secondary: var(--system-secondary-label);
+  --theme-accent: #007AFF;
+  --theme-border: rgba(0, 0, 0, 0.05);
+  --theme-radius: 24px;
+  --theme-radius-sm: 12px;
+  --theme-radius-lg: 32px;
+}
+
+.dark {
+  --system-label: #FFFFFF;
+  --system-secondary-label: #8E8E93;
+  --system-tertiary-label: #48484A;
+  --system-quaternary-label: #3A3A3C;
+  
+  --system-background: #1C1C1E;
+  --secondary-system-background: #2C2C2E;
+  --tertiary-system-background: #3A3A3C;
+
+  --theme-bg: #121214;
+  --theme-surface: var(--system-background);
+  --theme-surface-secondary: var(--secondary-system-background);
+  --theme-text: var(--system-label);
+  --theme-text-secondary: var(--system-secondary-label);
+  --theme-accent: #0A84FF;
+  --theme-border: rgba(255, 255, 255, 0.06);
+}
+
+.dark-purple {
+  --theme-bg: #141218;
+  --theme-surface: #1D1B22;
+  --theme-accent: #BF5AF2;
+}
+
+.dark-blue {
+  --theme-bg: #0A111F;
+  --theme-surface: #141D2E;
+  --theme-accent: #5AC8FA;
+}
+
+/* --- OS Based Themes --- */
+
+.theme-win98 {
+  --theme-bg: #008080;
+  --theme-surface: #C0C0C0;
+  --theme-border: #FFFFFF #808080 #808080 #FFFFFF;
+  --theme-accent: #000080;
+  --theme-radius: 0px;
+  --theme-radius-sm: 0px;
+  --theme-radius-lg: 0px;
+}
+.theme-win98 .ios-surface {
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #0a0a0a;
+}
+
+.theme-winxp {
+  --theme-bg: #245ED7;
+  --theme-surface: #ECE9D8;
+  --theme-accent: #3D9549;
+  --theme-radius: 8px;
+}
+
+.theme-redhat {
+  --theme-bg: #2B2B2B;
+  --theme-surface: #3C3C3C;
+  --theme-accent: #CC0000;
+  --theme-text: #FFFFFF;
+}
+
+.theme-playstation {
+  --theme-bg: #003087;
+  --theme-surface: #003791;
+  --theme-accent: #00A1DE;
+  --theme-text: #FFFFFF;
+}
+
+.theme-xbox {
+  --theme-bg: #0E1E0E;
+  --theme-surface: #1A2E1A;
+  --theme-accent: #107C10;
+  --theme-text: #FFFFFF;
+}
+
+/* --- Texture Based Themes --- */
+
+.theme-paper {
+  --theme-bg: #FDF9F3;
+  --theme-surface: #FFFFFF;
+  --theme-accent: #8B4513;
+}
+.theme-paper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.theme-glass {
+  --theme-bg: linear-gradient(165deg, #f8fafc 0%, #e2e8f0 40%, #cbd5e1 100%);
+  --theme-surface: rgba(255, 255, 255, 0.4);
+  --theme-border: rgba(255, 255, 255, 0.6);
+}
+
+.theme-wood {
+  --theme-bg: #3D2B1F;
+  --theme-surface: #5D4037;
+  --theme-accent: #D2B48C;
+  --theme-text: #F5F5F5;
+}
+
+.theme-metal {
+  --theme-bg: #2C3E50;
+  --theme-surface: #34495E;
+  --theme-accent: #BDC3C7;
+  --theme-text: #ECF0F1;
+}
+
+.theme-fabric {
+  --theme-bg: #2C3E50;
+  --theme-surface: #34495E;
+  --theme-accent: #3498DB;
+  --theme-text: #FFFFFF;
+}
+
+/* --- Cartoon Style Themes --- */
+
+.theme-scooby {
+  --theme-bg: #2E1A47;
+  --theme-surface: #3D2B56;
+  --theme-accent: #00B2B2;
+  --theme-text: #F4A460;
+}
+
+.theme-jetsons {
+  --theme-bg: #E0F7FA;
+  --theme-surface: #FFFFFF;
+  --theme-accent: #FF7043;
+  --theme-text: #006064;
+}
+
+.theme-ben10 {
+  --theme-bg: #000000;
+  --theme-surface: #1A1A1A;
+  --theme-accent: #00FF00;
+  --theme-text: #FFFFFF;
+}
+
+.theme-flintstones {
+  --theme-bg: #8D6E63;
+  --theme-surface: #A1887F;
+  --theme-accent: #FF9800;
+  --theme-text: #3E2723;
+}
+
+/* --- Movie Palette Themes --- */
+
+.theme-noir {
+  --theme-bg: #121212;
+  --theme-surface: #1E1E1E;
+  --theme-accent: #FFFFFF;
+  --theme-text: #E0E0E0;
+}
+
+.theme-cyberpunk {
+  --theme-bg: #0B0E14;
+  --theme-surface: #151921;
+  --theme-accent: #FCEE09;
+  --theme-text: #00F0FF;
+}
+
+.theme-wes {
+  --theme-bg: #F4E1D2;
+  --theme-surface: #F8F1E5;
+  --theme-accent: #E8A87C;
+  --theme-text: #413C3C;
+}
+
+.theme-matrix {
+  --theme-bg: #000000;
+  --theme-surface: #0D0D0D;
+  --theme-accent: #00FF41;
+  --theme-text: #00FF41;
+}
+
+/* --- Soft Dark Mode Adjustments --- */
+.dark[class*="theme-"] {
+  --theme-bg: #121214;
+  --theme-surface: #1C1C1E;
+  --theme-text: #F2F2F7;
+  --theme-border: rgba(255, 255, 255, 0.06);
+}
+
+.dark-purple[class*="theme-"] {
+  --theme-bg: #141218;
+  --theme-surface: #1D1B22;
+}
+
+.dark-blue[class*="theme-"] {
+  --theme-bg: #0A111F;
+  --theme-surface: #141D2E;
+}
+
+/* Specific dark mode overrides for themes that need to keep their "vibe" */
+.dark.theme-win98 { --theme-bg: #004040; --theme-surface: #404040; }
+.dark.theme-winxp { --theme-bg: #1A3A8A; --theme-surface: #2A2A2A; }
+.dark.theme-ben10 { --theme-bg: #000000; --theme-surface: #111111; }
+.dark.theme-matrix { --theme-bg: #000000; --theme-surface: #050505; }
+.dark.theme-cyberpunk { --theme-bg: #050505; --theme-surface: #101010; }
+
+body {
+  @apply antialiased selection:bg-blue-100 selection:text-blue-900 transition-colors duration-300;
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+/* --- iOS Material Layers --- */
+
+.ios-base {
+  background-color: var(--theme-bg);
+  transition: background-color 0.5s ease;
+}
+
+.ios-surface {
+  background-color: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius);
+  box-shadow: var(--shadow-ios);
+  transition: all 0.3s ease;
+}
+
+.ios-overlay {
+  background-color: color-mix(in srgb, var(--theme-surface) 80%, transparent);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--shadow-ios-lg);
+  transition: all 0.5s ease;
+}
+
+.ios-glass {
+  background-color: color-mix(in srgb, var(--theme-surface) 60%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--theme-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.ios-button {
+  background-color: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-sm);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.ios-button:active {
+  transform: scale(0.97);
+}
+
+.ios-modal-backdrop {
+  @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center transition-all duration-500;
+}
+
+/* --- UI Stability Utilities --- */
+
+.locked-viewport {
+  @apply fixed inset-0 overflow-hidden flex flex-col;
+  background-color: var(--theme-bg);
+}
+
+.scroll-container {
+  @apply flex-1 overflow-y-auto overflow-x-hidden overscroll-contain;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.safe-top-padding {
+  padding-top: var(--safe-top);
+}
+
+.safe-bottom-padding {
+  /* nav height + safe area + 8pt */
+  padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + var(--spacing-8));
+}
+
+.fixed-card {
+  @apply h-[120px] min-h-[120px] max-h-[120px] w-full flex-shrink-0;
+}
+
+.fixed-card-lg {
+  @apply h-[200px] min-h-[200px] max-h-[200px] w-full flex-shrink-0;
+}
+
+.image-reserve {
+  @apply relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex-shrink-0;
+}
+
+.text-locked-1 {
+  @apply truncate block;
+}
+
+.text-locked-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.stable-button {
+  @apply inline-flex items-center justify-center transition-all active:scale-95 flex-shrink-0;
+}
+
+/* Paper Theme: Refined with subtle noise and soft lighting */
+.theme-paper {
+  background-color: #fdfaf6;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255,255,255,0.5) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* Glass Theme: Premium frosted look with deep gradients */
+.theme-glass {
+  background: linear-gradient(165deg, #f8fafc 0%, #e2e8f0 40%, #cbd5e1 100%);
+  background-attachment: fixed;
+}
+
+/* Wood Theme: Realistic grain and warm lighting */
+.theme-wood {
+  background-color: #f5e6d3;
+  background-image: 
+    radial-gradient(at 50% 0%, rgba(255,255,255,0.3) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%23f5e6d3'/%3E%3Cpath d='M10 0c5 10 5 20 0 30s-5 20 0 30 5 20 0 30M30 0c5 10 5 20 0 30s-5 20 0 30 5 20 0 30M50 0c5 10 5 20 0 30s-5 20 0 30 5 20 0 30M70 0c5 10 5 20 0 30s-5 20 0 30 5 20 0 30M90 0c5 10 5 20 0 30s-5 20 0 30 5 20 0 30' stroke='%23d2b48c' stroke-width='0.4' fill='none' opacity='0.25'/%3E%3C/svg%3E");
+}
+
+/* Metal Theme: Brushed finish with specular highlights */
+.theme-metal {
+  background-color: #e2e8f0;
+  background-image: 
+    linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(0,0,0,0.05) 100%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px);
+}
+
+/* Fabric Theme: Tactile weave and soft shadows */
+.theme-fabric {
+  background-color: #f1f5f9;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255,255,255,0.4) 0%, transparent 50%),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 4px 4px, 4px 4px;
+}
+
+/* --- Premium UI Utilities --- */
+
+.glass-card {
+  @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-sm;
+}
+
+.dark .glass-card {
+  @apply bg-black/40 backdrop-blur-xl border-white/10 shadow-lg;
+}
+
+.soft-shadow {
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.02),
+    0 10px 20px rgba(0,0,0,0.04);
+}
+
+.premium-border {
+  @apply border border-gray-100/50 dark:border-white/5;
+}
+
+.mesh-gradient {
+  background: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(147, 51, 234, 0.15) 0%, transparent 50%);
+}
+
+.inner-glow {
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.text-gradient-blue {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-blue-500 to-blue-700 dark:from-blue-400 dark:to-blue-600;
+}
+
+.premium-shadow {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 20px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.glass-button {
+  @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-sm hover:bg-white/80 dark:hover:bg-white/10 transition-all duration-300 active:scale-95;
+}
+
+/* Theme Overrides for Components */
+
+/* Glass Theme Overrides */
+.theme-glass .bg-white, 
+.theme-glass .bg-gray-50,
+.theme-glass .bg-gray-100,
+.theme-glass .bg-blue-50 {
+  @apply bg-white/40 backdrop-blur-lg border-white/60 shadow-sm;
+}
+
+.theme-glass .dark .bg-gray-900,
+.theme-glass .dark .bg-black,
+.theme-glass .dark .bg-gray-800 {
+  @apply bg-black/40 backdrop-blur-lg border-white/10 shadow-xl;
+}
+
+/* Paper Theme Overrides */
+.theme-paper .bg-white,
+.theme-paper .bg-gray-50,
+.theme-paper .bg-gray-100 {
+  background-color: rgba(255, 255, 255, 0.75);
+  @apply border-orange-100/30 shadow-sm;
+}
+
+/* Wood Theme Overrides */
+.theme-wood .bg-white,
+.theme-wood .bg-gray-50,
+.theme-wood .bg-gray-100 {
+  background-color: rgba(255, 255, 255, 0.65);
+  @apply border-amber-200/20 shadow-sm;
+}
+
+/* Metal Theme Overrides */
+.theme-metal .bg-white,
+.theme-metal .bg-gray-50,
+.theme-metal .bg-gray-100 {
+  background-color: rgba(255, 255, 255, 0.85);
+  @apply border-slate-300/30 shadow-sm;
+}
+
+/* Fabric Theme Overrides */
+.theme-fabric .bg-white,
+.theme-fabric .bg-gray-50,
+.theme-fabric .bg-gray-100 {
+  background-color: rgba(255, 255, 255, 0.75);
+  @apply border-slate-200/40 shadow-sm;
+}
